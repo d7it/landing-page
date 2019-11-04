@@ -1,0 +1,79 @@
+html
+    background: -webkit-linear-gradient(315deg, hsla(181.01, 100%, 23.33%, 1) 0%, hsla(181.01, 100%, 23.33%, 0) 70%), -webkit-linear-gradient(65deg, hsla(97.06, 25.76%, 74.12%, 1) 10%, hsla(97.06, 25.76%, 74.12%, 0) 80%), -webkit-linear-gradient(135deg, hsla(27.17, 88.33%, 47.06%, 1) 15%, hsla(27.17, 88.33%, 47.06%, 0) 80%), -webkit-linear-gradient(205deg, hsla(355.56, 67.5%, 31.37%, 1) 100%, hsla(355.56, 67.5%, 31.37%, 0) 70%) no-repeat fixed center top
+    background: linear-gradient(135deg, hsla(181.01, 100%, 23.33%, 1) 0%, hsla(181.01, 100%, 23.33%, 0) 70%), linear-gradient(25deg, hsla(97.06, 25.76%, 74.12%, 1) 10%, hsla(97.06, 25.76%, 74.12%, 0) 80%), linear-gradient(315deg, hsla(27.17, 88.33%, 47.06%, 1) 15%, hsla(27.17, 88.33%, 47.06%, 0) 80%), linear-gradient(245deg, hsla(355.56, 67.5%, 31.37%, 1) 100%, hsla(355.56, 67.5%, 31.37%, 0) 70%) no-repeat fixed center top
+    min-height: 100%
+
+body
+    //background: #e26e0e
+    color: #ffffff
+    font-family: 'Open Sans', sans-serif
+    //background: url(/images/bg.png) repeat
+
+.container
+    width: 100%
+    max-width: 1500px
+    box-sizing: border-box
+
+h1, h2, h3, h4, h5, h6
+    font-family: 'Raleway', sans-serif
+
+a
+    text-decoration: none
+    color: #FFF
+
+#info
+    color: #ddd !important
+    font-size: 80%
+    font-weight: 400
+
+.links
+    .col
+        a
+            width: 100%
+            background: #FFF
+            color: #000
+            display: block
+            transition: 0.2s all
+
+            &:hover
+                border: 4px solid #000
+
+            img, object
+                border-bottom: 1px solid #eee
+                padding-bottom: 15px
+                margin-bottom: 15px
+                width: 100%
+
+.linksList
+    background: #ffffff
+    color: #000000
+    padding-top: 20px
+    padding-bottom: 20px
+
+    li:last-child
+        padding-bottom: 0
+        margin: 0
+        border: none
+
+    li
+        border-bottom: 1px solid #ddd
+        cursor: pointer
+        position: relative
+        padding-bottom: 20px
+        margin-bottom: 20px
+        padding-right: 15px
+        
+        a
+            color: #000000
+        
+        &::after
+            content: ""
+            position: absolute
+            bottom: calc(50% - 7px)
+            right: 0px
+            width: 0
+            height: 0
+            border-top: 10px solid transparent
+            border-bottom: 10px solid transparent
+            border-left: 15px solid #8e8e8e
+            
