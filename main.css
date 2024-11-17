@@ -1,9 +1,23 @@
+:root {
+  --bg: white;
+  --text: black;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #212121;
+    --text: #cfcfcf;
+  }
+
+  .logo-image {
+    filter: invert(8%);
+  }
+}
+
 html {
   min-height: 100%;
-  background-color: white;
-  background-size: cover;
-  background-attachment: fixed;
-  color: black;
+  background-color: var(--bg);
+  color: var(--text);
   font-family: "Open Sans", sans-serif;
 }
 
@@ -41,11 +55,10 @@ body {
 .card {
     width: 400px;
     flex-grow: 1;
-    background-color: white;
     border: 3px solid #f9a800;
+    box-shadow: 2px 4px 15px -12px lightgray;
     padding: 10px;
     margin: 20px;
-    color: black;
 }
 
 .card-header {
