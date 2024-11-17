@@ -43,7 +43,16 @@ body {
 }
 
 .languages {
-    margin: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 1em;
+  margin: 20px;
+  flex-grow: 1;
+}
+
+.languages img {
+  cursor: pointer;
 }
 
 .cards {
@@ -88,4 +97,3 @@ a {
 .eng {
   display: none;
 }
-
