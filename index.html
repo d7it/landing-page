@@ -77,7 +77,7 @@
 
                     <h3 class="card-title">:Domus7 Wiki</h3>
                 </div>
-               
+
                 <p class="description">
                     <span class="eng">
                         The wiki of :Domus7, here you will find all information about the dorm.
@@ -133,7 +133,7 @@
                 </div>
 
                 <p class="description">
-                    <span class="eng">Instagram account of the :D7. Managed by de chronik tutoriat. @domus7_ka</span>
+                    <span class="eng">Instagram account of the :D7. Managed by the chronicle tutoriat. @domus7_ka</span>
                     <span class="ger">Instagram Account des :D7. Verwaltet durch das Chronik Tutoriat. @domus7_ka</span>
                 </p>
             </a>
@@ -161,7 +161,7 @@
                     <img src="images/icons/fix.svg" class="card-image"></img>
                     <h3 class="card-title">Fix it</h3>
                 </div>
-                
+
                 <p class="description">
                     <span class="eng">Lightbulb broken? Sink clogged? Inform the housekeeper with this ticket
                         system.</span>
@@ -198,8 +198,27 @@
             </a>
         </div>
 
+        <div class="card">
+            <a target="_blank" class="rounded p3">
+                <div class="card-header">
+                    <img src="images/icons/laundry.svg" class="card-image"></img>
+                    <h3 class="card-title">Willy-Wasch-Anzeige 7</h3>
+                </div>
 
-    </div>
+                <p class="description">
+                    <span class="eng">laundry machines and dryers overview</span>
+                    <span class="ger">Übersicht der Waschmaschinen und Trockner</span>
+                </p>
+
+                <div class="machines">
+                </div>
+
+                <div class="dryers">
+                </div>
+            </a>
+        </div>
+
+
     </div>
     <footer style="padding: 20px">
         <a href="/datenschutz.html">Datenschutz</a>
@@ -210,3 +229,67 @@
 </body>
 
 </html>
+
+<script>
+    function updateLaundry() {
+    fetch("https://rent.d7.whka.de/api/status")
+        .then(response => response.json())
+        .then(data => {
+            const machinesContainer = document.querySelector(".machines");
+            machinesContainer.innerHTML = "";
+
+            let inactiveMachinesCounter = 0;
+            data.machines.forEach(machine => {
+                const machineElement = document.createElement("div");
+                machineElement.classList.add("machine");
+
+                if (machine.in_use) {
+                    const machineStatus = document.createElement("p");
+                    machineStatus.textContent = `Status: ${machine.status}`;
+                    machineElement.appendChild(machineStatus);
+
+                    const startedAt = document.createElement("p");
+                    const startTime = new Date(machine.started_at);
+                    startedAt.textContent = `Started At: ${startTime.toLocaleTimeString()}`;
+                    machineElement.appendChild(startedAt);
+
+                    machinesContainer.appendChild(machineElement);
+                } else {
+                    inactiveMachinesCounter++;
+                }
+            });
+            let inactiveMachines = document.createElement("p");
+            inactiveMachines.textContent = "Inactive Machines: " + inactiveMachinesCounter;
+            machinesContainer.appendChild(inactiveMachines);
+
+            const dryersContainer = document.querySelector(".dryers");
+            dryersContainer.innerHTML = "";
+
+            let inactiveDryersCounter = 0;
+            data.dryers.forEach(dryer => {
+                const dryerElement = document.createElement("div");
+                dryerElement.classList.add("dryer");
+                if (dryer.in_use) {
+                    const dryerStatus = document.createElement("p");
+                    dryerStatus.textContent = `Status: ${dryer.status}`;
+                    dryerElement.appendChild(dryerStatus);
+
+                    const startedAt = document.createElement("p");
+                    const startTime = new Date(dryer.started_at);
+                    startedAt.textContent = `Started At: ${startTime.toLocaleTimeString()}`;
+                    dryerElement.appendChild(startedAt);
+
+                    dryersContainer.appendChild(dryerElement);
+                } else {
+                    inactiveDryersCounter++;
+                }
+            });
+            let inactiveDryers = document.createElement("p");
+            inactiveDryers.textContent = "Inactive Dryers: " + inactiveDryersCounter;
+            dryersContainer.appendChild(inactiveDryers);
+        })
+        .catch(error => console.error("Error fetching laundry machine data:", error));
+    }
+    updateLaundry();
+    setInterval(updateLaundry, 1000 * 60);
+</script>

@@ -97,3 +97,16 @@ a {
 .eng {
   display: none;
 }
+
+.machines, .dryers {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.machine {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
