@@ -43,10 +43,20 @@
             <div class="dryers">
             </div>
 
-            <span class="ger">Verfügbare Waschmaschinen: <p class="machine-count"></p></span>
-            <span class="eng">Available Washing Machines: <p class="machine-count"></p></span>
-            <span class="ger">Verfügbare Trockner: <p class="dryer-count"></p></span>
-            <span class="eng">Available Dryers: <p class="dryer-count"></p></span>
+            <div class="free-devices-wrapper">
+                <div class="free-devices">
+                    <span class="ger">Verfügbare Waschmaschinen: </span>
+                    <span class="machine-count ger"></span>
+                    <span class="eng">Available Washing Machines: </span>
+                    <span class="machine-count eng"></span>
+                </div>
+                <div class="free-devices">
+                    <span class="ger">Verfügbare Trockner: </span>
+                    <span class="dryer-count ger"></span>
+                    <span class="eng">Available Dryers: </span>
+                    <span class="dryer-count eng"></span>
+                </div>
+            </div>
 
             <sub style="margin-top: 10px; display: block; text-align: center;">
                 <span class="eng">Machine starts are usually detected ~5mins after the actual start and ~2mins for dryers. All information is provided without guarantee.</span>
@@ -259,12 +269,14 @@
                         machineElementEng.appendChild(machineTitle);
 
                         const machineStatus = document.createElement("p");
+                        machineStatus.classList.add("attribute");
                         machineStatus.textContent = `Läuft voraussichtlich noch ${machine.status}`;
                         machineElementGer.appendChild(machineStatus);
                         machineStatus.textContent = `Expected to run for ${machine.status}`;
                         machineElementEng.appendChild(machineStatus);
 
                         const startedAt = document.createElement("p");
+                        startedAt.classList.add("attribute");
                         startedAt.textContent = `Gestartet um ${machine.started_at}`;
                         machineElementGer.appendChild(startedAt);
                         machineStatus.textContent = `Started at ${machine.started_at}`;
@@ -301,12 +313,14 @@
                         dryerElementEng.appendChild(dryerTitle);
 
                         const dryerStatus = document.createElement("p");
+                        dryerStatus.classList.add("attribute");
                         dryerStatus.textContent = `Läuft voraussichtlich noch ${dryer.status}`;
                         dryerElementGer.appendChild(dryerStatus);
                         dryerStatus.textContent = `Expected to run for ${dryer.status}`;
                         dryerElementEng.appendChild(dryerStatus);
 
                         const startedAt = document.createElement("p");
+                        startedAt.classList.add("attribute");
                         startedAt.textContent = `Gestartet um ${dryer.started_at}`;
                         dryerElementGer.appendChild(startedAt);
                         startedAt.textContent = `Started at ${dryer.started_at}`;

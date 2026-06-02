@@ -100,7 +100,7 @@ a {
 
 .machines, .dryers {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 20px;
 }
 
@@ -108,4 +108,21 @@ a {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.attributes {
+    padding-left: 20px;
+}
+
+.free-devices-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.free-devices {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
