@@ -31,38 +31,41 @@
 <div class="cards">
     <div class="card" style="width: 100%; cursor: default;">
         <a target="_blank" class="rounded p3">
+
             <div class="card-header">
                 <img src="images/icons/laundry.svg" class="card-image">
                 <h3 class="card-title">Willy-Wasch-Anzeige 7</h3>(Beta)
             </div>
 
-            <div class="free-devices-wrapper">
-                <div class="free-devices">
-                    <span class="ger">Verfügbare Waschmaschinen: </span>
-                    <span class="machine-count ger"></span>
-                    <span class="eng">Available Washing Machines: </span>
-                    <span class="machine-count eng"></span>
+            <div class="card-body">
+                <div class="free-devices-wrapper">
+                    <div class="free-devices">
+                        <span class="ger">Verfügbare Waschmaschinen: </span>
+                        <span class="machine-count ger"></span>
+                        <span class="eng">Available Washing Machines: </span>
+                        <span class="machine-count eng"></span>
+                    </div>
+                    <div class="free-devices">
+                        <span class="ger">Verfügbare Trockner: </span>
+                        <span class="dryer-count ger"></span>
+                        <span class="eng">Available Dryers: </span>
+                        <span class="dryer-count eng"></span>
+                    </div>
                 </div>
-                <div class="free-devices">
-                    <span class="ger">Verfügbare Trockner: </span>
-                    <span class="dryer-count ger"></span>
-                    <span class="eng">Available Dryers: </span>
-                    <span class="dryer-count eng"></span>
+
+                <div class="machines">
+
                 </div>
+
+                <div class="dryers">
+                </div>
+
+
+                <sub style="margin-top: 10px; display: block; text-align: center;">
+                    <span class="eng">Machine starts are usually detected ~5mins after the actual start and ~2mins for dryers. All information is provided without guarantee.</span>
+                    <span class="ger">Maschinenstarts werden in der Regel ~5 Minuten und Trockner ~2 Minuten nach dem tatsächlichem Start erkannt. Alle Angaben ohne Gewähr.</span>
+                </sub>
             </div>
-
-            <div class="machines">
-
-            </div>
-
-            <div class="dryers">
-            </div>
-
-
-            <sub style="margin-top: 10px; display: block; text-align: center;">
-                <span class="eng">Machine starts are usually detected ~5mins after the actual start and ~2mins for dryers. All information is provided without guarantee.</span>
-                <span class="ger">Maschinenstarts werden in der Regel ~5 Minuten und Trockner ~2 Minuten nach dem tatsächlichem Start erkannt. Alle Angaben ohne Gewähr.</span>
-            </sub>
         </a>
     </div>
 
@@ -276,17 +279,6 @@
                         machineElementEng.appendChild(machineTitleEng);
 
 
-                        const machineStatus = document.createElement("span");
-                        machineStatus.classList.add("attribute");
-                        machineStatus.textContent = `Läuft voraussichtlich noch ${machine.status} Minuten`;
-                        machineElementGer.appendChild(machineStatus);
-
-                        const machineStatusEng = document.createElement("span");
-                        machineStatusEng.classList.add("attribute");
-                        machineStatusEng.textContent = `Expected to run for ${machine.status} minutes`;
-                        machineElementEng.appendChild(machineStatusEng);
-
-
                         const startedAt = document.createElement("span");
                         startedAt.classList.add("attribute");
                         startedAt.textContent = `Gestartet um ${machine.started_at}`;
@@ -296,6 +288,17 @@
                         startedAtEng.classList.add("attribute");
                         startedAtEng.textContent = `Started at ${machine.started_at}`;
                         machineElementEng.appendChild(startedAtEng);
+
+
+                        const machineStatus = document.createElement("span");
+                        machineStatus.classList.add("attribute");
+                        machineStatus.textContent = machine.status < 44 ? `Läuft voraussichtlich noch ${machine.status} Minuten` : `Läuft bereits ${machine.status} Minuten`;
+                        machineElementGer.appendChild(machineStatus);
+
+                        const machineStatusEng = document.createElement("span");
+                        machineStatusEng.classList.add("attribute");
+                        machineStatusEng.textContent = machine.status < 44 ? `Expected to run for ${machine.status} minutes` : `Running for already ${machine.status} minutes`;
+                        machineElementEng.appendChild(machineStatusEng);
 
 
                         germanElement.appendChild(machineElementGer);
@@ -339,16 +342,6 @@
                         dryerElementEng.appendChild(machineTitleEng);
 
 
-                        const dryerStatus = document.createElement("p");
-                        dryerStatus.classList.add("attribute");
-                        dryerStatus.textContent = `Läuft voraussichtlich noch ${dryer.status} Minuten`;
-                        dryerElementGer.appendChild(dryerStatus);
-
-                        const dryerStatusEng = document.createElement("span");
-                        dryerStatusEng.classList.add("attribute");
-                        dryerStatusEng.textContent = `Expected to run for ${dryer.status} minutes`;
-                        dryerElementEng.appendChild(dryerStatusEng);
-
                         const startedAt = document.createElement("p");
                         startedAt.classList.add("attribute");
                         startedAt.textContent = `Gestartet um ${dryer.started_at}`;
@@ -358,6 +351,18 @@
                         startedAtEng.classList.add("attribute");
                         startedAtEng.textContent = `Started at ${dryer.started_at}`;
                         dryerElementEng.appendChild(startedAtEng);
+
+
+                        const dryerStatus = document.createElement("p");
+                        dryerStatus.classList.add("attribute");
+                        dryerStatus.textContent = dryer.status < 30 ? `Läuft voraussichtlich noch ${dryer.status} Minuten` : `Läuft bereits ${dryer.status} Minuten`;
+                        dryerElementGer.appendChild(dryerStatus);
+
+                        const dryerStatusEng = document.createElement("span");
+                        dryerStatusEng.classList.add("attribute");
+                        dryerStatusEng.textContent = dryer.status < 30 ? `Expected to run for ${dryer.status} minutes` : `Running for already ${dryer.status} minutes`;
+                        dryerElementEng.appendChild(dryerStatusEng);
+
 
                         germanElement.appendChild(dryerElementGer);
                         englishElement.appendChild(dryerElementEng);
@@ -375,7 +380,20 @@
                     dryersContainer.style.display = "none";
                 }
             })
-            .catch(error => console.error("Error fetching laundry machine data:", error));
+            .catch(error => {
+                console.error("Error fetching laundry machine data:", error);
+                const loadingDataElement = document.querySelector(".card-body");
+                loadingDataElement.innerHTML = "";
+                const loadingMessageGer = document.createElement("span");
+                loadingMessageGer.classList.add("ger");
+                loadingMessageGer.textContent = "Lade Daten..."
+                const loadingMessageEng = document.createElement("span");
+                loadingMessageEng.classList.add("eng");
+                loadingMessageEng.classList.add("device-header");
+                loadingMessageEng.textContent = "Loading data..."
+                loadingDataElement.appendChild(loadingMessageGer);
+                loadingDataElement.appendChild(loadingMessageEng);
+            });
     }
 
     updateLaundry();
