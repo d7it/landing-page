@@ -310,7 +310,7 @@
                 inactiveMachines.forEach(element => {
                     element.textContent = inactiveMachinesCounter;
                 });
-                if (inactiveMachines.length === 3) {
+                if (inactiveMachinesCounter === 3) {
                     machinesContainer.style.display = "none";
                 }
 
@@ -371,7 +371,7 @@
                 inactiveDryers.forEach(element => {
                     element.textContent = inactiveDryersCounter;
                 });
-                if (inactiveDryers.length === 2) {
+                if (inactiveDryersCounter === 2) {
                     dryersContainer.style.display = "none";
                 }
             })
