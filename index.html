@@ -278,12 +278,12 @@
 
                         const machineStatus = document.createElement("span");
                         machineStatus.classList.add("attribute");
-                        machineStatus.textContent = `Läuft voraussichtlich noch ${machine.status / 60} Minuten`;
+                        machineStatus.textContent = `Läuft voraussichtlich noch ${machine.status} Minuten`;
                         machineElementGer.appendChild(machineStatus);
 
                         const machineStatusEng = document.createElement("span");
                         machineStatusEng.classList.add("attribute");
-                        machineStatusEng.textContent = `Expected to run for ${machine.status / 60} minutes`;
+                        machineStatusEng.textContent = `Expected to run for ${machine.status} minutes`;
                         machineElementEng.appendChild(machineStatusEng);
 
 
@@ -341,12 +341,12 @@
 
                         const dryerStatus = document.createElement("p");
                         dryerStatus.classList.add("attribute");
-                        dryerStatus.textContent = `Läuft voraussichtlich noch ${(dryer.status / 60)} Minuten`;
+                        dryerStatus.textContent = `Läuft voraussichtlich noch ${dryer.status} Minuten`;
                         dryerElementGer.appendChild(dryerStatus);
 
                         const dryerStatusEng = document.createElement("span");
                         dryerStatusEng.classList.add("attribute");
-                        dryerStatusEng.textContent = `Expected to run for ${dryer.status / 60} minutes`;
+                        dryerStatusEng.textContent = `Expected to run for ${dryer.status} minutes`;
                         dryerElementEng.appendChild(dryerStatusEng);
 
                         const startedAt = document.createElement("p");
