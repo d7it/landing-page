@@ -54,12 +54,9 @@
                 </div>
 
                 <div class="machines">
-
                 </div>
-
                 <div class="dryers">
                 </div>
-
 
                 <sub style="margin-top: 10px; display: block; text-align: center;">
                     <span class="eng">Machine starts are usually detected ~5mins after the actual start and ~2mins for dryers. All information is provided without guarantee.</span>
@@ -281,23 +278,23 @@
 
                         const startedAt = document.createElement("span");
                         startedAt.classList.add("attribute");
-                        startedAt.textContent = `Gestartet um ${machine.started_at}`;
+                        startedAt.textContent = `Gestartet um: ${machine.started_at}`;
                         machineElementGer.appendChild(startedAt);
 
                         const startedAtEng = document.createElement("span");
                         startedAtEng.classList.add("attribute");
-                        startedAtEng.textContent = `Started at ${machine.started_at}`;
+                        startedAtEng.textContent = `Started at: ${machine.started_at}`;
                         machineElementEng.appendChild(startedAtEng);
 
 
                         const machineStatus = document.createElement("span");
                         machineStatus.classList.add("attribute");
-                        machineStatus.textContent = machine.status < 44 ? `Läuft voraussichtlich noch ${machine.status} Minuten` : `Läuft bereits ${machine.status} Minuten`;
+                        machineStatus.textContent = machine.status < 44 ? `Mögliches Ende in: ${machine.status} Minuten` : `Läuft bereits ${machine.status} Minuten`;
                         machineElementGer.appendChild(machineStatus);
 
                         const machineStatusEng = document.createElement("span");
                         machineStatusEng.classList.add("attribute");
-                        machineStatusEng.textContent = machine.status < 44 ? `Expected to run for ${machine.status} minutes` : `Running for already ${machine.status} minutes`;
+                        machineStatusEng.textContent = machine.status < 44 ? `Possible end in: ${machine.status} minutes` : `Running for already ${machine.status} minutes`;
                         machineElementEng.appendChild(machineStatusEng);
 
 
@@ -344,23 +341,23 @@
 
                         const startedAt = document.createElement("p");
                         startedAt.classList.add("attribute");
-                        startedAt.textContent = `Gestartet um ${dryer.started_at}`;
+                        startedAt.textContent = `Gestartet um: ${dryer.started_at}`;
                         dryerElementGer.appendChild(startedAt);
 
                         const startedAtEng = document.createElement("span");
                         startedAtEng.classList.add("attribute");
-                        startedAtEng.textContent = `Started at ${dryer.started_at}`;
+                        startedAtEng.textContent = `Started at: ${dryer.started_at}`;
                         dryerElementEng.appendChild(startedAtEng);
 
 
                         const dryerStatus = document.createElement("p");
                         dryerStatus.classList.add("attribute");
-                        dryerStatus.textContent = dryer.status < 30 ? `Läuft voraussichtlich noch ${dryer.status} Minuten` : `Läuft bereits ${dryer.status} Minuten`;
+                        dryerStatus.textContent = dryer.status < 30 ? `Noch ${dryer.status} Minuten` : `Läuft bereits ${dryer.status} Minuten`;
                         dryerElementGer.appendChild(dryerStatus);
 
                         const dryerStatusEng = document.createElement("span");
                         dryerStatusEng.classList.add("attribute");
-                        dryerStatusEng.textContent = dryer.status < 30 ? `Expected to run for ${dryer.status} minutes` : `Running for already ${dryer.status} minutes`;
+                        dryerStatusEng.textContent = dryer.status < 30 ? `Possible end in: ${dryer.status} minutes` : `Running for already ${dryer.status} minutes`;
                         dryerElementEng.appendChild(dryerStatusEng);
 
 
