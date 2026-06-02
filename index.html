@@ -29,18 +29,11 @@
 </div>
 
 <div class="cards">
-    <div class="card" style="width: 100%;">
+    <div class="card" style="width: 100%; cursor: default;">
         <a target="_blank" class="rounded p3">
             <div class="card-header">
                 <img src="images/icons/laundry.svg" class="card-image">
                 <h3 class="card-title">Willy-Wasch-Anzeige 7</h3>(Beta)
-            </div>
-
-            <div class="machines">
-
-            </div>
-
-            <div class="dryers">
             </div>
 
             <div class="free-devices-wrapper">
@@ -57,6 +50,14 @@
                     <span class="dryer-count eng"></span>
                 </div>
             </div>
+
+            <div class="machines">
+
+            </div>
+
+            <div class="dryers">
+            </div>
+
 
             <sub style="margin-top: 10px; display: block; text-align: center;">
                 <span class="eng">Machine starts are usually detected ~5mins after the actual start and ~2mins for dryers. All information is provided without guarantee.</span>
@@ -254,36 +255,53 @@
 
                 let inactiveMachinesCounter = 0;
                 data.machines.forEach(machine => {
+                    const germanElement = document.createElement("div");
+                    germanElement.classList.add("ger");
+                    const englishElement = document.createElement("div");
+                    englishElement.classList.add("eng");
                     const machineElementGer = document.createElement("div");
                     machineElementGer.classList.add("machine");
-                    machineElementGer.classList.add("ger");
                     const machineElementEng = document.createElement("div");
                     machineElementEng.classList.add("machine");
-                    machineElementEng.classList.add("eng");
 
                     if (machine.in_use) {
-                        const machineTitle = document.createElement("h5");
+                        const machineTitle = document.createElement("span");
+                        machineTitle.classList.add("device-header");
                         machineTitle.textContent = "Aktive Waschmaschine";
                         machineElementGer.appendChild(machineTitle);
-                        machineTitle.textContent = "Active Washing Machine";
-                        machineElementEng.appendChild(machineTitle);
 
-                        const machineStatus = document.createElement("p");
+                        const machineTitleEng = document.createElement("span");
+                        machineTitleEng.classList.add("device-header");
+                        machineTitleEng.textContent = "Active Washing Machine";
+                        machineElementEng.appendChild(machineTitleEng);
+
+
+                        const machineStatus = document.createElement("span");
                         machineStatus.classList.add("attribute");
                         machineStatus.textContent = `Läuft voraussichtlich noch ${machine.status}`;
                         machineElementGer.appendChild(machineStatus);
-                        machineStatus.textContent = `Expected to run for ${machine.status}`;
-                        machineElementEng.appendChild(machineStatus);
 
-                        const startedAt = document.createElement("p");
+                        const machineStatusEng = document.createElement("span");
+                        machineStatusEng.classList.add("attribute");
+                        machineStatusEng.textContent = `Expected to run for ${machine.status}`;
+                        machineElementEng.appendChild(machineStatusEng);
+
+
+                        const startedAt = document.createElement("span");
                         startedAt.classList.add("attribute");
                         startedAt.textContent = `Gestartet um ${machine.started_at}`;
                         machineElementGer.appendChild(startedAt);
-                        machineStatus.textContent = `Started at ${machine.started_at}`;
-                        machineElementEng.appendChild(startedAt);
 
-                        machinesContainer.appendChild(machineElementGer);
-                        machinesContainer.appendChild(machineElementEng);
+                        const startedAtEng = document.createElement("span");
+                        startedAtEng.classList.add("attribute");
+                        startedAtEng.textContent = `Started at ${machine.started_at}`;
+                        machineElementEng.appendChild(startedAtEng);
+
+
+                        germanElement.appendChild(machineElementGer);
+                        englishElement.appendChild(machineElementEng);
+                        machinesContainer.appendChild(germanElement);
+                        machinesContainer.appendChild(englishElement);
                     } else {
                         inactiveMachinesCounter++;
                     }
@@ -292,42 +310,59 @@
                 inactiveMachines.forEach(element => {
                     element.textContent = inactiveMachinesCounter;
                 });
-
+                if (inactiveMachines.length === 3) {
+                    machinesContainer.style.display = "none";
+                }
 
                 const dryersContainer = document.querySelector(".dryers");
                 dryersContainer.innerHTML = "";
 
                 let inactiveDryersCounter = 0;
                 data.dryers.forEach(dryer => {
+                    const germanElement = document.createElement("div");
+                    germanElement.classList.add("ger");
+                    const englishElement = document.createElement("div");
+                    englishElement.classList.add("eng");
                     const dryerElementGer = document.createElement("div");
-                    dryerElementGer.classList.add("dryer");
-                    dryerElementGer.classList.add("ger");
+                    dryerElementGer.classList.add("machine");
                     const dryerElementEng = document.createElement("div");
-                    dryerElementEng.classList.add("dryer");
-                    dryerElementEng.classList.add("eng");
+                    dryerElementEng.classList.add("machine");
+
                     if (dryer.in_use) {
-                        const dryerTitle = document.createElement("h5");
+                        const dryerTitle = document.createElement("p");
                         dryerTitle.textContent = "Aktiver Trockner";
                         dryerElementGer.appendChild(dryerTitle);
-                        dryerTitle.textContent = "Active Dryer";
-                        dryerElementEng.appendChild(dryerTitle);
+
+                        const machineTitleEng = document.createElement("span");
+                        machineTitleEng.classList.add("device-header");
+                        machineTitleEng.textContent = "Active Dryer";
+                        dryerElementEng.appendChild(machineTitleEng);
+
 
                         const dryerStatus = document.createElement("p");
                         dryerStatus.classList.add("attribute");
                         dryerStatus.textContent = `Läuft voraussichtlich noch ${dryer.status}`;
                         dryerElementGer.appendChild(dryerStatus);
-                        dryerStatus.textContent = `Expected to run for ${dryer.status}`;
-                        dryerElementEng.appendChild(dryerStatus);
+
+                        const dryerStatusEng = document.createElement("span");
+                        dryerStatusEng.classList.add("attribute");
+                        dryerStatusEng.textContent = `Expected to run for ${dryer.status}`;
+                        dryerElementEng.appendChild(dryerStatusEng);
 
                         const startedAt = document.createElement("p");
                         startedAt.classList.add("attribute");
                         startedAt.textContent = `Gestartet um ${dryer.started_at}`;
                         dryerElementGer.appendChild(startedAt);
-                        startedAt.textContent = `Started at ${dryer.started_at}`;
-                        dryerElementEng.appendChild(startedAt);
 
-                        dryersContainer.appendChild(dryerElementGer);
-                        dryersContainer.appendChild(dryerElementEng);
+                        const startedAtEng = document.createElement("span");
+                        startedAtEng.classList.add("attribute");
+                        startedAtEng.textContent = `Started at ${dryer.started_at}`;
+                        dryerElementEng.appendChild(startedAtEng);
+
+                        germanElement.appendChild(dryerElementGer);
+                        englishElement.appendChild(dryerElementEng);
+                        dryersContainer.appendChild(germanElement);
+                        dryersContainer.appendChild(englishElement);
                     } else {
                         inactiveDryersCounter++;
                     }
@@ -336,6 +371,9 @@
                 inactiveDryers.forEach(element => {
                     element.textContent = inactiveDryersCounter;
                 });
+                if (inactiveDryers.length === 2) {
+                    dryersContainer.style.display = "none";
+                }
             })
             .catch(error => console.error("Error fetching laundry machine data:", error));
     }
