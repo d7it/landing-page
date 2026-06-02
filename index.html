@@ -43,6 +43,11 @@
             <div class="dryers">
             </div>
 
+            <span class="ger">Verfügbare Waschmaschinen: <p class="machine-count"></p></span>
+            <span class="eng">Available Washing Machines: <p class="machine-count"></p></span>
+            <span class="ger">Verfügbare Trockner: <p class="dryer-count"></p></span>
+            <span class="eng">Available Dryers: <p class="dryer-count"></p></span>
+
             <sub style="margin-top: 10px; display: block; text-align: center;">
                 <span class="eng">Machine starts are usually detected ~5mins after the actual start and ~2mins for dryers. All information is provided without guarantee.</span>
                 <span class="ger">Maschinenstarts werden in der Regel ~5 Minuten und Trockner ~2 Minuten nach dem tatsächlichem Start erkannt. Alle Angaben ohne Gewähr.</span>
@@ -239,53 +244,84 @@
 
                 let inactiveMachinesCounter = 0;
                 data.machines.forEach(machine => {
-                    const machineElement = document.createElement("div");
-                    machineElement.classList.add("machine");
+                    const machineElementGer = document.createElement("div");
+                    machineElementGer.classList.add("machine");
+                    machineElementGer.classList.add("ger");
+                    const machineElementEng = document.createElement("div");
+                    machineElementEng.classList.add("machine");
+                    machineElementEng.classList.add("eng");
 
                     if (machine.in_use) {
+                        const machineTitle = document.createElement("h5");
+                        machineTitle.textContent = "Aktive Waschmaschine";
+                        machineElementGer.appendChild(machineTitle);
+                        machineTitle.textContent = "Active Washing Machine";
+                        machineElementEng.appendChild(machineTitle);
+
                         const machineStatus = document.createElement("p");
-                        machineStatus.textContent = `Status: ${machine.status}`;
-                        machineElement.appendChild(machineStatus);
+                        machineStatus.textContent = `Läuft voraussichtlich noch ${machine.status}`;
+                        machineElementGer.appendChild(machineStatus);
+                        machineStatus.textContent = `Expected to run for ${machine.status}`;
+                        machineElementEng.appendChild(machineStatus);
 
                         const startedAt = document.createElement("p");
-                        const startTime = new Date(machine.started_at);
-                        startedAt.textContent = `Started At: ${startTime.toLocaleTimeString()}`;
-                        machineElement.appendChild(startedAt);
+                        startedAt.textContent = `Gestartet um ${machine.started_at}`;
+                        machineElementGer.appendChild(startedAt);
+                        machineStatus.textContent = `Started at ${machine.started_at}`;
+                        machineElementEng.appendChild(startedAt);
 
-                        machinesContainer.appendChild(machineElement);
+                        machinesContainer.appendChild(machineElementGer);
+                        machinesContainer.appendChild(machineElementEng);
                     } else {
                         inactiveMachinesCounter++;
                     }
                 });
-                let inactiveMachines = document.createElement("p");
-                inactiveMachines.textContent = "Inactive Machines: " + inactiveMachinesCounter;
-                machinesContainer.appendChild(inactiveMachines);
+                const inactiveMachines = document.querySelectorAll(".machine-count");
+                inactiveMachines.forEach(element => {
+                    element.textContent = inactiveMachinesCounter;
+                });
+
 
                 const dryersContainer = document.querySelector(".dryers");
                 dryersContainer.innerHTML = "";
 
                 let inactiveDryersCounter = 0;
                 data.dryers.forEach(dryer => {
-                    const dryerElement = document.createElement("div");
-                    dryerElement.classList.add("dryer");
+                    const dryerElementGer = document.createElement("div");
+                    dryerElementGer.classList.add("dryer");
+                    dryerElementGer.classList.add("ger");
+                    const dryerElementEng = document.createElement("div");
+                    dryerElementEng.classList.add("dryer");
+                    dryerElementEng.classList.add("eng");
                     if (dryer.in_use) {
+                        const dryerTitle = document.createElement("h5");
+                        dryerTitle.textContent = "Aktiver Trockner";
+                        dryerElementGer.appendChild(dryerTitle);
+                        dryerTitle.textContent = "Active Dryer";
+                        dryerElementEng.appendChild(dryerTitle);
+
                         const dryerStatus = document.createElement("p");
-                        dryerStatus.textContent = `Status: ${dryer.status}`;
-                        dryerElement.appendChild(dryerStatus);
+                        dryerStatus.textContent = `Läuft voraussichtlich noch ${dryer.status}`;
+                        dryerElementGer.appendChild(dryerStatus);
+                        dryerStatus.textContent = `Expected to run for ${dryer.status}`;
+                        dryerElementEng.appendChild(dryerStatus);
 
                         const startedAt = document.createElement("p");
-                        const startTime = new Date(dryer.started_at);
-                        startedAt.textContent = `Started At: ${startTime.toLocaleTimeString()}`;
-                        dryerElement.appendChild(startedAt);
+                        startedAt.textContent = `Gestartet um ${dryer.started_at}`;
+                        dryerElementGer.appendChild(startedAt);
+                        startedAt.textContent = `Started at ${dryer.started_at}`;
+                        dryerElementEng.appendChild(startedAt);
 
-                        dryersContainer.appendChild(dryerElement);
+                        dryersContainer.appendChild(dryerElementGer);
+                        dryersContainer.appendChild(dryerElementEng);
                     } else {
                         inactiveDryersCounter++;
                     }
                 });
-                let inactiveDryers = document.createElement("p");
-                inactiveDryers.textContent = "Inactive Dryers: " + inactiveDryersCounter;
-                dryersContainer.appendChild(inactiveDryers);
+                const inactiveDryers = document.querySelectorAll(".dryer-count");
+                inactiveDryers.forEach(element => {
+                    element.textContent = inactiveDryersCounter;
+                });
             })
             .catch(error => console.error("Error fetching laundry machine data:", error));
     }
