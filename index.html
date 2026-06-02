@@ -329,7 +329,8 @@
                     dryerElementEng.classList.add("machine");
 
                     if (dryer.in_use) {
-                        const dryerTitle = document.createElement("p");
+                        const dryerTitle = document.createElement("span");
+                        dryerTitle.classList.add("device-header");
                         dryerTitle.textContent = "Aktiver Trockner";
                         dryerElementGer.appendChild(dryerTitle);
 
@@ -339,7 +340,7 @@
                         dryerElementEng.appendChild(machineTitleEng);
 
 
-                        const startedAt = document.createElement("p");
+                        const startedAt = document.createElement("span");
                         startedAt.classList.add("attribute");
                         startedAt.textContent = `Gestartet um: ${dryer.started_at}`;
                         dryerElementGer.appendChild(startedAt);
@@ -350,9 +351,9 @@
                         dryerElementEng.appendChild(startedAtEng);
 
 
-                        const dryerStatus = document.createElement("p");
+                        const dryerStatus = document.createElement("span");
                         dryerStatus.classList.add("attribute");
-                        dryerStatus.textContent = dryer.status < 30 ? `Noch ${dryer.status} Minuten` : `Läuft bereits ${dryer.status} Minuten`;
+                        dryerStatus.textContent = dryer.status < 30 ? `Mögliches Ende in: ${dryer.status} Minuten` : `Läuft bereits ${dryer.status} Minuten`;
                         dryerElementGer.appendChild(dryerStatus);
 
                         const dryerStatusEng = document.createElement("span");
