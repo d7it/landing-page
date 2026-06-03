@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <title>:Domus7 - Wichtige Links</title>
+    <script src="https://cdn.jsdelivr.net/npm/plotly.js-dist@3.5.1/plotly.min.js"></script>
 </head>
 
 <body>
@@ -38,6 +39,7 @@
             </div>
 
             <div class="card-body">
+
                 <div class="free-devices-wrapper">
                     <div class="free-devices">
                         <span class="ger">Verfügbare Waschmaschinen: </span>
@@ -52,6 +54,10 @@
                         <span class="dryer-count eng"></span>
                     </div>
                 </div>
+
+                <div id="barchart" class="barchart">
+                </div>
+
 
                 <div class="machines">
                 </div>
@@ -241,10 +247,6 @@
 </footer>
 <!-- JavaScript Import -->
 <script src="main.js"></script>
-</body>
-
-</html>
-
 <script>
     function updateLaundry() {
         fetch("https://rent.d7.whka.de/api/status")
@@ -394,6 +396,100 @@
             });
     }
 
+    function peakHoursChart() {
+        fetch("https://rent.d7.whka.de/api/status")
+            .then(response => response.json())
+            .then(data => {
+                const machinesPerHour = data.machines_per_hour;
+                const currentHour = new Date().getHours();
+                const xHr = [currentHour - 1, currentHour, currentHour + 1, currentHour + 2, currentHour + 3].map(hour => (hour + 24) % 24);
+                const yMachines = xHr.map(hour => machinesPerHour[hour] || 0);
+                const maxIndex = yMachines.reduce((maxIdx, currentValue, currentIndex, array) => currentValue > array[maxIdx] ? currentIndex : maxIdx, 0);
+
+                const barchartData = [{
+                    x: xHr,
+                    y: yMachines,
+                    type: 'bar',
+                    marker: {
+                        color: '#f9a800',
+                    }
+                }]
+
+                const layout = {
+                    title: {
+                        text: 'peak hours for washing machines',
+                        y: 0.73,
+                        font: {
+                            size: 10,
+                            color: 'white',
+                        }
+                    },
+                    width: 400,
+                    height: 250,
+                    paper_bgcolor: 'transparent',
+                    plot_bgcolor: 'transparent',
+                    font: {
+                        color: 'white',
+                    },
+                    barcornerradius: 8,
+                    yaxis: {
+                        gridcolor: 'rgba(255,255,255,0.1)',
+                        dtick: 1,
+                        title: {
+                            text: 'machine usage',
+                            standoff: 10,
+                            font: {
+                                size: 10,
+                                color: 'white',
+                            }
+                        }
+                    },
+                    xaxis: {
+                        dtick: 1,
+                        title: {
+                            text: 'hour of the day',
+                            standoff: 10,
+                            font: {
+                                size: 10,
+                                color: 'white',
+                            },
+
+                        },
+                        type: 'category',
+                        categoryorder: 'trace',
+                    },
+                    annotations: [
+                        {
+                            x: 1,
+                            y: -0.2,
+                            showarrow: true,
+                            arrowhead: 0,
+                            arrowsize: 10,
+                            ax: 0,
+                            ay: -80,
+                            arrowcolor: "red",
+                            text: 'now',
+                            textposition: 'top center',
+                            font: {
+                                size: 10,
+                                color: 'red',
+                            }
+                        },
+                    ]
+                };
+
+                const config = {
+                    staticPlot: true
+                };
+
+                Plotly.newPlot("barchart", barchartData, layout, config);
+            });
+    }
+
+    peakHoursChart();
     updateLaundry();
     setInterval(updateLaundry, 1000 * 60);
 </script>
+
+</body>
+</html>
