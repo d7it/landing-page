@@ -141,6 +141,8 @@ a {
     position: absolute;
     right: 0;
     top: -50px;
+    height: 250px;
+    width: 400px;
 }
 
 .barchart-title {
@@ -157,5 +159,19 @@ a {
 
     .attribute {
         margin-left: 0;
+    }
+
+    .barchart {
+        position: static;
+        height: 100%;
+        width: 100%;
+        padding: -20px;
+    }
+
+    .barchart-wrapper {
+        display: flex;
+        justify-content: center;
+        height: 250px;
+        width: 85vw;
     }
 }
