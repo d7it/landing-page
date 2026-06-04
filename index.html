@@ -60,7 +60,8 @@
                 <div class="dryers">
                 </div>
 
-                <div class="barchart-wrapper" title="Barchart showing the number of machine starts in the last week, grouped by hour of the day.">
+                <div class="barchart-wrapper"
+                     title="Barchart showing the number of machine starts in the last week, grouped by hour of the day.">
                     <div id="barchart" class="barchart"></div>
                 </div>
 
@@ -403,15 +404,17 @@
                 const machinesPerHour = data.machines_per_hour;
                 const currentHour = new Date().getHours();
                 const xHr = [currentHour - 1, currentHour, currentHour + 1, currentHour + 2, currentHour + 3].map(hour => (hour + 24) % 24);
+                const testData = [1, 3, 3, 5, 4]
                 const yMachines = xHr.map(hour => machinesPerHour[hour] || 0);
                 const maxIndex = yMachines.reduce((maxIdx, currentValue, currentIndex, array) => currentValue > array[maxIdx] ? currentIndex : maxIdx, 0);
+                const maxY = Math.max(...yMachines);
 
                 const barchartData = [{
                     x: xHr,
                     y: yMachines,
                     type: 'bar',
                     marker: {
-                        color: '#f9a800',
+                        color: ['#f9a800', '#f94200', '#f9a800', '#f9a800', '#f9a800'],
                     }
                 }]
 
@@ -435,6 +438,7 @@
                     yaxis: {
                         gridcolor: 'rgba(255,255,255,0.1)',
                         dtick: 1,
+                        range: [-0.2, Math.max(1, 5)],
                         title: {
                             text: 'machine usage',
                             standoff: 10,
@@ -461,18 +465,15 @@
                     annotations: [
                         {
                             x: 1,
-                            y: -0.2,
-                            showarrow: true,
-                            arrowhead: 0,
-                            arrowsize: 10,
+                            y: yMachines[1],
                             ax: 0,
-                            ay: -85,
-                            arrowcolor: "red",
+                            ay: -10,
+                            arrowcolor: "transparent",
                             text: 'now',
                             textposition: 'top center',
                             font: {
                                 size: 10,
-                                color: 'red',
+                                color: '#f94200',
                             }
                         },
                     ]
