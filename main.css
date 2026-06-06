@@ -1,6 +1,7 @@
 :root {
     --bg: white;
     --text: black;
+    --d7-color: #f9a800
 }
 
 @media (prefers-color-scheme: dark) {
@@ -32,7 +33,7 @@ body {
 }
 
 .logo {
-    background-color: #f9a800;
+    background-color: var(--d7-color);
     margin: 0;
     padding: 20px;
     width: 200px;
@@ -64,7 +65,7 @@ body {
 .card {
     width: 400px;
     flex-grow: 1;
-    border: 3px solid #f9a800;
+    border: 3px solid var(--d7-color);
     box-shadow: 2px 4px 15px -12px lightgray;
     padding: 10px;
     margin: 20px;
@@ -146,8 +147,106 @@ a {
 }
 
 .barchart-title {
-    font-size: 13.33px;
+    display: none;
 }
+
+/* .feedback-button {
+    background-color: var(--d7-color);
+    color: var(--bg);
+    border: 1px solid var(--d7-color);
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 13.33px;
+    margin: 10px 0;
+
+    &:hover {
+        background-color: var(--bg);
+        color: var(--text);
+    }
+
+    &:active {
+        background-color: var(--bg);
+    }
+}
+
+.feedback-dialog-container {
+    position: absolute;
+}
+
+.feedback-dialog {
+    position: fixed;
+    top: 30vh;
+    left: 35vw;
+    height: 40vh;
+    width: 30vw;
+    background-color: var(--bg);
+    color: var(--text);
+    border: 3px solid var(--d7-color);
+    padding: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-form {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+.feedback-textarea {
+    flex-grow: 1;
+    resize: none;
+    padding: 10px;
+    color: var(--text);
+    background-color: var(--bg);
+    border: 1px solid var(--d7-color);
+    resize: none;
+    margin-top: 20px;
+}
+
+.feedback-dialog-bg {
+    top: 0;
+    left: 0;
+    position: fixed;
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 999;
+}
+
+.feedback-dialog-title {
+    width: 80%;
+}
+
+.cancel-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    color: var(--d7-color);
+    border: none;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 20px;
+
+    &:hover {
+        background-color: var(--d7-color);
+        color: var(--bg);
+    }
+
+    &:active {
+        background-color: var(--d7-color);
+        color: var(--bg);
+    }
+
+}
+
+.hidden {
+    display: none;
+} */
+
 
 @media (max-width: 768px) {
 
@@ -175,4 +274,17 @@ a {
         width: 99vw;
         margin: -60px -30px -20px -30px;
     }
+
+    .barchart-title {
+        margin-top: 40px;
+        font-weight: bold;
+        display: flex;
+    }
+
+   /* .feedback-dialog {
+        width: 70vw;
+        height: 60vh;
+        left: 8vw;
+        top: 15vh;
+    } */
 }
