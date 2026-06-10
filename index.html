@@ -69,7 +69,7 @@
                     <div id="barchart" class="barchart"></div>
                 </div>
 
-                <!-- <div class="feedback">
+                <div class="feedback">
                     <button class="feedback-button" command="show-modal" commandfor="feedback-dialog">
                         <span class="eng">Feedback</span>
                         <span class="ger">Feedback</span>
@@ -87,8 +87,36 @@
                             </div>
                             <form action="https://api.web3forms.com/submit" method="POST" class="feedback-form">
                                 <input type="hidden" name="access_key" value="ccd9dc29-077c-4c73-9326-97825d2b9660">
-                                <textarea name="message" class="feedback-textarea" placeholder="Feedback..."
-                                          required></textarea>
+
+                                <input type="hidden" name="detected laundry machines" class="machine-count">
+                                <input type="hidden" name="detected dryers" class="dryer-count">
+
+                                <div class="selection">
+                                    <span class="eng">Actual running machines:</span>
+                                    <span class="ger">Tatsächlich laufende Maschinen:</span>
+                                    <select name="actual laundry machines" class="feedback-selection">
+                                        <option value="" disabled selected>
+                                            <span class="eng">Select amount available machines</span>
+                                        </option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                                <div class="selection">
+                                    <span class="eng">Actual running dryers:</span>
+                                    <span class="ger">Tatsächlich laufende Trockner:</span>
+                                    <select name="actual dryers" class="feedback-selection">
+                                        <option value="" disabled selected>
+                                            <span class="eng">Select amount available dryers</span>
+                                        </option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+                                <textarea name="message" class="feedback-textarea" placeholder="Other..."></textarea>
                                 <button class="feedback-button" type="submit" onclick="feedback()">
                                     <span class="eng">Submit</span>
                                     <span class="ger">Absenden</span>
@@ -97,7 +125,7 @@
                         </div>
                         <div class="feedback-dialog-bg"></div>
                     </dialog>
-                </div> -->
+                </div>
 
                 <sub style="margin-top: 10px; display: block; text-align: center;">
                     <span class="eng">Machine starts are detected ~5mins after the actual start and ~2mins for dryers. Machine duration longer than 50mins usally means it's finished. <br/> All information is provided without guarantee. </span>
@@ -346,6 +374,9 @@
                 const inactiveMachines = document.querySelectorAll(".machine-count");
                 inactiveMachines.forEach(element => {
                     element.textContent = inactiveMachinesCounter;
+                    if (element.tagName === 'INPUT') {
+                        element.value = 3 - inactiveMachinesCounter;
+                    }
                 });
                 if (inactiveMachinesCounter === 3) {
                     machinesContainer.style.display = "none";
@@ -410,6 +441,9 @@
                 const inactiveDryers = document.querySelectorAll(".dryer-count");
                 inactiveDryers.forEach(element => {
                     element.textContent = inactiveDryersCounter;
+                    if (element.tagName === 'INPUT') {
+                        element.value = 2 - inactiveDryersCounter;
+                    }
                 });
                 if (inactiveDryersCounter === 2) {
                     dryersContainer.style.display = "none";
@@ -522,7 +556,7 @@
             });
     }
 
-    /* function feedback() {
+    function feedback() {
         const form = document.getElementById('form');
         const submitBtn = form.querySelector('button[type="submit"]');
 
@@ -560,7 +594,7 @@
                 submitBtn.disabled = false;
             }
         });
-    } */
+    }
 
     peakHoursChart();
     updateLaundry();
