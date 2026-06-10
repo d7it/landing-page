@@ -307,4 +307,9 @@ a {
         left: 8vw;
         top: 15vh;
     }
+   .selection {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 }
