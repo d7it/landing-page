@@ -169,6 +169,22 @@ a {
     }
 }
 
+.feedback-selection {
+    margin-left: 10px;
+    background-color: transparent;
+    color: var(--d7-color);
+
+    &:hover {
+        background-color: var(--d7-color);
+        color: var(--bg);
+    }
+
+    &:active {
+        background-color: var(--bg);
+        color: var(--text);
+    }
+}
+
 
 .feedback-dialog-container {
     position: absolute;
